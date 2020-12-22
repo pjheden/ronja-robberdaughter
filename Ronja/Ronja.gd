@@ -12,6 +12,8 @@ var dir = Vector2()
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	$AnimatedSprite.play()
+	
 
 func process_input():
 	dir = Vector2()
@@ -34,11 +36,6 @@ func process_movement(delta):
 	move_and_slide(motion)
 	
 func process_animation():
-	if dir.length() <= 0:
-		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
-				
 	if vel.x != 0:
 		$AnimatedSprite.animation = "walk"
 		$AnimatedSprite.flip_v = false

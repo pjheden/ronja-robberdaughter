@@ -1,21 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Ronja/Ronja.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 129.78, 16.9246 )
-
-[sub_resource type="CanvasItemMaterial" id=3]
-
-[sub_resource type="CubeMesh" id=2]
-
-[sub_resource type="CanvasItemMaterial" id=4]
-
-[sub_resource type="CanvasItemMaterial" id=5]
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 265.784, 10 )
+[ext_resource path="res://Platforms/MeshPlatform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Platforms/SpritePlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/lava.png" type="Texture" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -31,52 +20,26 @@ position = Vector2( 62.2111, 396.041 )
 
 [node name="Map" type="Node2D" parent="."]
 
-[node name="Platform" type="StaticBody2D" parent="Map"]
-position = Vector2( 0, -0.747849 )
+[node name="Platform" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 130.919, 583.789 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Platform"]
-position = Vector2( 129.683, 584.906 )
-shape = SubResource( 1 )
+[node name="Platform4" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 16.2688, 295.419 )
+scale = Vector2( 0.120002, 18.28 )
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Map/Platform"]
-material = SubResource( 3 )
-position = Vector2( 129.683, 584.906 )
-scale = Vector2( -129.957, -16.3195 )
-mesh = SubResource( 2 )
+[node name="Platform2" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 477.264, 583.789 )
 
-[node name="Platform2" type="StaticBody2D" parent="Map"]
-position = Vector2( 261.058, -0.747849 )
+[node name="Platform3" parent="Map" instance=ExtResource( 3 )]
+position = Vector2( 893.012, 583.82 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Platform2"]
-position = Vector2( 129.683, 584.906 )
-shape = SubResource( 1 )
+[node name="Lava" parent="Map" instance=ExtResource( 4 )]
+position = Vector2( 303.865, 583.789 )
+scale = Vector2( 0.162985, 0.270931 )
+texture = ExtResource( 5 )
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Map/Platform2"]
-material = SubResource( 3 )
-position = Vector2( 129.683, 584.906 )
-scale = Vector2( -129.957, -16.3195 )
-mesh = SubResource( 2 )
-
-[node name="Platform3" type="StaticBody2D" parent="Map"]
-material = SubResource( 4 )
-position = Vector2( 670.944, 0.187294 )
-scale = Vector2( 1.35903, 0.99427 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Platform3"]
-position = Vector2( 129.683, 584.906 )
-shape = SubResource( 1 )
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Map/Platform3"]
-material = SubResource( 5 )
-position = Vector2( 129.683, 584.906 )
-scale = Vector2( -129.957, -16.3195 )
-mesh = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="Map"]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Sprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Sprite/StaticBody2D"]
-position = Vector2( 259.661, 590.865 )
-shape = SubResource( 6 )
+[node name="Lava2" parent="Map" instance=ExtResource( 4 )]
+position = Vector2( 685.273, 583.789 )
+scale = Vector2( 0.30166, 0.270931 )
+texture = ExtResource( 5 )
 [connection signal="hit" from="Player" to="." method="game_over"]

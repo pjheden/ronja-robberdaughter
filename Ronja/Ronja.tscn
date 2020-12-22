@@ -1,18 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Ronja/Ronja.gd" type="Script" id=1]
-[ext_resource path="res://assets/tim_assets/SONJA-IDLE-TEST.png" type="Texture" id=2]
+[ext_resource path="res://assets/SONJA-IDLE-TEST/SONJA-IDLE-TEST.png" type="Texture" id=2]
+[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-1.png" type="Texture" id=3]
+[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-2.png" type="Texture" id=4]
+[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-3.png" type="Texture" id=5]
+[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-4.png" type="Texture" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
-"name": "up",
-"speed": 5.0
+"name": "walk",
+"speed": 7.0
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "walk",
+"name": "up",
 "speed": 5.0
 } ]
 
@@ -27,6 +31,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 1 )
 animation = "walk"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.062714, 0.687294 )
