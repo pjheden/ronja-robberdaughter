@@ -2,13 +2,13 @@ extends KinematicBody2D
 
 signal hit
 
-export var walkspeed = 350 # pixels/sec
-export var jumpspeed = 2000
-export var gravityscale = 200
+export var walkspeed = 300 # pixels/sec
+export var jumpspeed = -400
+export var gravityscale = 1200
 
 var screen_size
 var vel = Vector2()
-var dir = Vector2()
+var jumping = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -16,24 +16,24 @@ func _ready():
 	
 
 func process_input():
-	dir = Vector2()
-	if Input.is_action_pressed("ui_right"):
-		dir.x += 1
-	if Input.is_action_pressed("ui_left"):
-		dir.x -= 1
-	if Input.is_action_just_pressed("jump"):
-		dir.y -= 1
-	return dir
+	vel.x = 0
+	var right = Input.is_action_pressed("ui_right")
+	var left = Input.is_action_pressed("ui_left")
+	var jump = Input.is_action_just_pressed("jump")
+	
+	if jump and (is_on_floor() or is_on_wall()):
+		jumping = true
+		vel.y = jumpspeed
+	if right:
+		vel.x += walkspeed
+	if left:
+		vel.x -= walkspeed
 
 func process_movement(delta):
-#	if dir.length() <= 0:
-#		return vel
-	vel = dir.normalized()
-	vel.x *= walkspeed
-	vel.y *= jumpspeed
-	vel.y += gravityscale
-	var motion = vel * delta
-	move_and_slide(motion)
+	vel.y += gravityscale * delta
+	if jumping and (is_on_floor() or is_on_wall()):
+		jumping = false
+	vel = move_and_slide(vel, Vector2(0, -1)) # move_and_slide uses delta internally for the sliding part
 	
 func process_animation():
 	if vel.x != 0:
@@ -41,9 +41,8 @@ func process_animation():
 		$AnimatedSprite.flip_v = false
 		# See the note below about boolean assignment
 		$AnimatedSprite.flip_h = vel.x < 0
-	elif vel.y != 0:
-		$AnimatedSprite.animation = "up"
-#		$AnimatedSprite.flip_v = vel.y > 0
+	else:
+		$AnimatedSprite.animation = "idle"
 	
 func _process(delta):
 	process_animation()
@@ -51,6 +50,10 @@ func _process(delta):
 func _physics_process(delta):
 	process_input()
 	process_movement(delta)
+	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+#		print("I collided with ", collision.collider.name)
 	
 func _on_Player_body_entered(body):
 #	TODO: we need to disguish between what we enter, ie. shouldnt die from hitting platform

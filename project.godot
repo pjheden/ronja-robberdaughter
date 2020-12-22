@@ -52,6 +52,11 @@ jump={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Blocking"
+2d_physics/layer_2="Harmful"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
