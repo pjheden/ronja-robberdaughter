@@ -5,7 +5,9 @@ extents = Vector2( 265.784, 10 )
 
 [node name="Sprite" type="Sprite"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=[
+"harmful",
+]]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

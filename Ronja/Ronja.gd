@@ -53,8 +53,11 @@ func _physics_process(delta):
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-#		print("I collided with ", collision.collider.name)
+		if "harmful" in collision.collider.get_groups():
+			die()
+			
 	
+# This method is only used when we use move_and_collide
 func _on_Player_body_entered(body):
 #	TODO: we need to disguish between what we enter, ie. shouldnt die from hitting platform
 	pass
@@ -62,6 +65,11 @@ func _on_Player_body_entered(body):
 #	emit_signal("hit")
 #	$CollisionShape2D.set_deferred("disabled", true)
 
+func die():
+	hide()
+#	emit_signal("hit")
+	$CollisionShape2D.set_deferred("disabled", true)
+	
 # start initializes the player by setting position, making sure its visible and
 # all necessary components is enabled
 func start(pos):
