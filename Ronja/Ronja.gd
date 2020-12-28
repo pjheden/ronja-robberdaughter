@@ -34,13 +34,19 @@ func process_movement(delta):
 	if jumping and (is_on_floor() or is_on_wall()):
 		jumping = false
 	vel = move_and_slide(vel, Vector2(0, -1)) # move_and_slide uses delta internally for the sliding part
+	if abs(vel.x) < 1.0:
+		vel.x = 0
+	if abs(vel.y) < 1.0:
+		vel.y = 0
 	
 func process_animation():
-	if vel.x != 0:
+	if vel.x != 0 and vel.y == 0:
 		$AnimatedSprite.animation = "walk"
-		$AnimatedSprite.flip_v = false
-		# See the note below about boolean assignment
 		$AnimatedSprite.flip_h = vel.x < 0
+	elif vel.y != 0:
+		$AnimatedSprite.animation = "jump"
+		$AnimatedSprite.flip_h = vel.x < 0
+		
 	else:
 		$AnimatedSprite.animation = "idle"
 	
@@ -61,14 +67,11 @@ func _physics_process(delta):
 func _on_Player_body_entered(body):
 #	TODO: we need to disguish between what we enter, ie. shouldnt die from hitting platform
 	pass
-#	hide()  # Player disappears after being hit.
-#	emit_signal("hit")
-#	$CollisionShape2D.set_deferred("disabled", true)
 
 func die():
 	hide()
-#	emit_signal("hit")
-	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.disabled = true
+	emit_signal("hit")
 	
 # start initializes the player by setting position, making sure its visible and
 # all necessary components is enabled

@@ -1,38 +1,142 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Ronja/Ronja.gd" type="Script" id=1]
-[ext_resource path="res://assets/SONJA-IDLE-TEST/SONJA-IDLE-TEST.png" type="Texture" id=2]
-[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-1.png" type="Texture" id=3]
-[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-2.png" type="Texture" id=4]
-[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-3.png" type="Texture" id=5]
-[ext_resource path="res://assets/SONJA-WALK-V1/SONJA-WALK-4.png" type="Texture" id=6]
+[ext_resource path="res://assets/SONJA-IDLEJUMP-23-12-2020.png" type="Texture" id=2]
+[ext_resource path="res://assets/SONJA-WALKS-23-12-2020.png" type="Texture" id=3]
+[ext_resource path="res://assets/SONJA-IDLE-23-12-2020.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 31, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 62, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 93, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 124, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 155, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 186, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 217, 0, 31, 53 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 35, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 70, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 105, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 140, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 175, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 210, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 245, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 280, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 315, 0, 35, 61 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 31, 61 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 31, 0, 31, 61 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "walk",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": false,
+"name": "jump",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "idle",
-"speed": 5.0
+"speed": 2.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 9.93729
-height = 52.0
+height = 45.0614
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 4.58909, -5.76577 )
+scale = Vector2( 1.06724, 1.21219 )
 frames = SubResource( 1 )
-animation = "idle"
+animation = "jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.062714, 0.687294 )
+position = Vector2( 0.18039, 0.569626 )
 shape = SubResource( 2 )

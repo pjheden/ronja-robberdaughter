@@ -5,7 +5,8 @@ func _ready():
 
 
 func game_over():
-	pass # Replace with function body.
+	# Let's just restart when we die
+	$Player.start($StartPosition.position)
 
 func new_game():
 	$Player.start($StartPosition.position)
