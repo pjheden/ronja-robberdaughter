@@ -18,7 +18,7 @@ position = Vector2( 99.6871, -71.7625 )
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Platform" parent="Map" instance=ExtResource( 3 )]
-position = Vector2( 383.305, 105.853 )
+position = Vector2( 30.9997, 199.315 )
 scale = Vector2( 3.94782, 1.14262 )
 
 [node name="Platform4" parent="Map" instance=ExtResource( 3 )]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Platforms/MovingPlatform.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[node name="MovingPlatform" type="Node2D"]
+scale = Vector2( 11.24, 1 )
+script = ExtResource( 1 )
+
+[node name="Platform" type="KinematicBody2D" parent="."]
+scale = Vector2( 0.437723, 1 )
+motion/sync_to_physics = true
+
+[node name="Sprite" type="Sprite" parent="Platform"]
+visible = false
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
+scale = Vector2( 10, 10.04 )
+mesh = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
