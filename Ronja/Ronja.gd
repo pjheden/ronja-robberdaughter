@@ -5,13 +5,14 @@ signal hit
 export var walkspeed = 300 # pixels/sec
 export var jumpspeed = -400
 export var gravityscale = 1200
-export var shoot_delay = 0.64
+export var shoot_delay = 0.78
 
 var arrow_scene = preload("res://Projectile/Arrow.tscn")
 
 var screen_size
 var vel = Vector2()
 var jumping = false
+var wall_jumping = false
 var facing_right = true # What direction sonja is looking at
 var shooting = false
 
@@ -41,17 +42,29 @@ func process_input():
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_just_pressed("jump")
 	var shoot = Input.is_action_just_pressed("shoot")
-	 
-	if jump and (is_on_floor() or is_on_wall()):
-		jumping = true
-#		$AnimatedSprite.animation = "jump"
-		vel.y = jumpspeed
+		
 	if right:
 		vel.x += walkspeed
 		facing_right = true
 	if left:
 		vel.x -= walkspeed
 		facing_right = false
+		
+	# Jump on ground
+	if jump and is_on_floor():
+		jumping = true
+#		$AnimatedSprite.animation = "jump"
+		vel.y = jumpspeed
+	# Jump on wall
+	elif jump and is_on_wall() and not wall_jumping:
+		wall_jumping = true
+		vel.y = jumpspeed
+#		The idea is to push the player out from the wall, but it is not really working
+#		if facing_right:
+#			vel.x += jumpspeed
+#		else:
+#			vel.x -= jumpspeed
+		
 	if shoot && !shooting:
 		start_shoot()
 
@@ -80,27 +93,29 @@ func process_animation():
 		$AnimatedSprite.animation = "idle"
 	$AnimatedSprite.flip_h = not facing_right
 	
-func _process(delta):
+func _process(_delta):
 	process_animation()
 	
 func _physics_process(delta):
+	if is_on_floor():
+		wall_jumping = false
 	# Character is freezed while shooting
 	if !shooting:
 		process_input()
 	else:
 		vel.x = 0 # Stop any movement
-	process_movement(delta)
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		if "harmful" in collision.collider.get_groups():
+		var groups = collision.collider.get_groups()
+		if "harmful" in groups:
 			die()
+		elif "bounce" in groups:
+			if vel.y == 0:
+				vel.y = jumpspeed * 2
+	process_movement(delta)
+		
 	
-# This method is only used when we use move_and_collide
-func _on_Player_body_entered(body):
-#	TODO: we need to disguish between what we enter, ie. shouldnt die from hitting platform
-	pass
-
 func die():
 	hide()
 	$CollisionShape2D.disabled = true

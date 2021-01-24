@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30.8926, 23.1743 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 26.9974, 7.99392 )
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.551971, 8.38145 )
+shape = SubResource( 1 )
+
+[node name="Head" type="StaticBody2D" parent="." groups=[
+"bounce",
+]]
+
+[node name="Bounce" type="CollisionShape2D" parent="Head" groups=[
+"bounce",
+]]
+position = Vector2( -0.0865936, -23.9185 )
+shape = SubResource( 2 )

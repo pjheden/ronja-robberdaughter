@@ -241,6 +241,7 @@ script = ExtResource( 4 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 visible = false
 jumpspeed = -420
+shoot_delay = 0.1
 
 [node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 221.011, 110.465 )
@@ -286,10 +287,10 @@ anchor_left = 2.551
 anchor_top = 0.176
 anchor_right = 2.551
 anchor_bottom = 0.176
-margin_left = -202.157
-margin_top = 7.21106
-margin_right = 202.843
-margin_bottom = 47.2111
+margin_left = -976.714
+margin_top = 4.88982
+margin_right = -793.714
+margin_bottom = 44.8898
 rect_scale = Vector2( 2.1405, 2.1405 )
 text = "You won! Can you believe it?"
 __meta__ = {
